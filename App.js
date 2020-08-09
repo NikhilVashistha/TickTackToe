@@ -6,22 +6,30 @@
  * @flow
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, StatusBar, View} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Game from './Game';
 
 const App: () => React$Node = () => {
+  const [currentPlayer, setCurrentPlayer] = useState('X');
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="dark-content" backgroundColor="white" />
       <SafeAreaView>
         <View styles={styles.sectionContainer}>
           <Text style={styles.sectionDescription}>
             Tick Tac Toe Hiver Assignment
           </Text>
-          <Game />
+          <Game
+            setCurrentPlayer={player => {
+              setCurrentPlayer(player);
+            }}
+          />
+          <Text style={styles.sectionDescription}>
+            Player {currentPlayer} turn
+          </Text>
         </View>
       </SafeAreaView>
     </>
@@ -53,6 +61,7 @@ const styles = StyleSheet.create({
   },
   sectionDescription: {
     marginTop: 30,
+    textAlign: 'center',
     fontSize: 18,
     fontWeight: '400',
     color: Colors.dark,
